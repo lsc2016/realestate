@@ -5,24 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>세입자 장부</title>
-<meta name="apple-mobile-web-app-title" content="세입자 장부">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1E6A4E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="세입자 장부">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" href="apple-touch-icon.png">
-<meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<script>
+  // 홈 화면 아이콘으로 열렸으면 바로 앱으로. 브라우저에서 보통 열었으면 "장부 열기" 버튼을 보여 준다.
+  var APP = "https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom";
+  if ((window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true) {
+    document.documentElement.className = "go";
+    location.replace(APP);
+  }
+</script>
 <style>
-  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-         background: #1E6A4E; color: #F4F7F5; font: 22px/1.5 -apple-system, "Apple SD Gothic Neo", sans-serif; text-align: center; }
-  a { color: #F4F7F5; font-weight: 700; }
-  img { width: 120px; height: 120px; border-radius: 26px; display: block; margin: 0 auto 20px; }
+  html, body { margin: 0; background: #1E6A4E; color: #F4F7F5; }
+  body { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center;
+         font: 20px/1.5 -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; text-align: center; padding: 0 16px; box-sizing: border-box; }
+  main { width: 100%; max-width: 420px; }
+  img { width: 120px; height: 120px; border-radius: 26px; display: block; margin: 0 auto 18px; }
+  h1 { font-size: 30px; margin: 0 0 28px; font-weight: 700; }
+  .open { display: block; width: 100%; box-sizing: border-box; padding: 22px 16px; border-radius: 18px; background: #F4F7F5; color: #1E6A4E;
+          font-size: 28px; font-weight: 800; text-decoration: none; }
+  .open:active { opacity: .85; }
+  .tip { margin: 22px 0 0; font-size: 16px; line-height: 1.6; color: #D3E6DC; }
+  .tip b { color: #F4F7F5; }
+  .wait { display: none; font-size: 22px; }
+  html.go main { display: none; }
+  html.go .wait { display: block; }
 </style>
 </head>
 <body>
-  <div>
-    <img src="apple-touch-icon.png" alt="">
-    세입자 장부 여는 중…<br>
-    <a href="https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom">안 열리면 여기를 누르세요</a>
-  </div>
-  <script>location.replace("https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom");</script>
+  <main>
+    <img src="icon-192.png" alt="">
+    <h1>세입자 장부</h1>
+    <a class="open" href="https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom">장부 열기</a>
+    <p class="tip" id="tip">크롬 메뉴 <b>⋮</b> → <b>홈 화면에 추가</b> 하면 앱처럼 쓸 수 있어요</p>
+  </main>
+  <div class="wait">여는 중…<br><a href="https://script.google.com/macros/s/AKfycbwGRpB_UF4stfswOQeJBOdibxwLElQFiFT7ZKQI171u8M6SaC0PPJ9799LAv3lz2UoxWw/exec?b=mom" style="color:#F4F7F5">안 열리면 여기를 누르세요</a></div>
+  <script>
+    // 아이폰·아이패드(사파리)는 메뉴가 달라서 안내만 바꾼다
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1))
+      document.getElementById("tip").innerHTML = "사파리 <b>공유 버튼</b> → <b>홈 화면에 추가</b> 하면 앱처럼 쓸 수 있어요";
+  </script>
 </body>
 </html>
